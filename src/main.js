@@ -15,7 +15,9 @@ Vue.use(ToastPlugin);
 FastClick.attach(document.body);
 Vue.config.productionTip = false;
 
+//date 日期格式化dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss')
 Vue.prototype.$dateFormat = dateFormat;
+
 new Vue({
   router,
   render: h => h(App)
