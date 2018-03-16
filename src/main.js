@@ -6,23 +6,24 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import Home from './components/HelloFromVux.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [{
   path: '/',
   component: Home
-}]
+}];
 
 const router = new VueRouter({
+  mode: 'history',
   routes
-})
+});
 
-FastClick.attach(document.body)
+FastClick.attach(document.body);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
   router,
   render: h => h(App)
-}).$mount('#app-box')
+}).$mount('#app-box');
