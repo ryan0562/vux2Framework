@@ -4,7 +4,7 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import App from './App.vue'
 import router from 'src/router/index'
-import {AlertPlugin, ToastPlugin} from 'vux'
+import {AlertPlugin, ToastPlugin, dateFormat} from 'vux'
 import 'src/common/axios'//axios 请求/拦截/ 组件使用方法this.$http
 
 //alert全局组件
@@ -12,12 +12,10 @@ Vue.use(AlertPlugin);
 //toast全局组件
 Vue.use(ToastPlugin);
 
-
-
 FastClick.attach(document.body);
-
 Vue.config.productionTip = false;
 
+Vue.prototype.$dateFormat = dateFormat;
 new Vue({
   router,
   render: h => h(App)
