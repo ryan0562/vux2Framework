@@ -27,7 +27,15 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  }
+  },
+  created() {
+    this.$http.post('/a',{mobile: 15397191444})
+      .then(res => {
+        console.log('成功', res)
+      }).catch(res => {
+      console.log('失败', res)
+    });
+  },
 }
 </script>
 

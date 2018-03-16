@@ -2,27 +2,22 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import FastClick from 'fastclick'
-import VueRouter from 'vue-router'
 import App from './App.vue'
-import Home from './components/HelloFromVux.vue'
+import router from 'src/router/index'
+import {AlertPlugin, ToastPlugin} from 'vux'
+import 'src/common/axios'//axios 请求/拦截/
 
-Vue.use(VueRouter);
+//alert全局组件
+Vue.use(AlertPlugin);
+//toast全局组件
+Vue.use(ToastPlugin);
 
-const routes = [{
-  path: '/',
-  component: Home
-}];
 
-const router = new VueRouter({
-  mode: 'history',
-  routes
-});
 
 FastClick.attach(document.body);
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
 new Vue({
   router,
   render: h => h(App)
