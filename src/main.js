@@ -5,7 +5,7 @@ import FastClick from 'fastclick'
 import App from './App.vue'
 import router from 'src/router/index'
 import {AlertPlugin, ToastPlugin} from 'vux'
-import 'src/common/axios'//axios 请求/拦截/
+import 'src/common/axios'//axios 请求/拦截/ 组件使用方法this.$http
 
 //alert全局组件
 Vue.use(AlertPlugin);
