@@ -1,7 +1,6 @@
 import Mock from 'mockjs';
 
-if (process.env.NODE_ENV !== 'production') {
-  let mockData = JSON.parse(localStorage.getItem('mock'));
+let mockData = JSON.parse(localStorage.getItem('mock'));
   let mockUse = function () {
     if (!mockData.checked) {
       return false
@@ -21,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
     }
   };
   mockUse();
-}
+
 
 
 
