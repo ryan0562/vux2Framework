@@ -10,17 +10,18 @@
       </group>
       <group title="拦截列表(左右拉动列表有惊喜)" class="box">
         <swipeout>
-          <swipeout-item v-for="(item,index) in mockList.main" :key="index"  class="vux-1px-tb">
+          <swipeout-item v-for="(item,key) in mockList.main" :key="key"  class="vux-1px-tb">
             <div slot="left-menu">
-              <swipeout-button type="warn" v-if="item.checked" @click.native="statusApply(item.url,false)">禁用
+              <swipeout-button type="warn" v-if="item.checked" @click.native="statusApply(key,false)">禁用
               </swipeout-button>
-              <swipeout-button type="primary" v-else @click.native="statusApply(item.url,true)">启用</swipeout-button>
+              <swipeout-button type="primary" v-else @click.native="statusApply(key,true)">启用</swipeout-button>
             </div>
             <div slot="right-menu">
-              <swipeout-button type="warn" @click.native="mockDel(item.url)">删除</swipeout-button>
+              <swipeout-button type="warn" @click.native="mockDel(key)">删除</swipeout-button>
             </div>
             <cell slot="content" :title="item.title" :inline-desc="item.url"
-                  @click.native.stop="mockEdit(item)" is-link :style="!item.checked?{background:'#ddd'}:''">
+                  @click.native.stop="openForm(key)" is-link :style="!item.checked?{background:'#ddd'}:''">
+              <span>{{item.method[0]}}</span>
             </cell>
           </swipeout-item>
         </swipeout>
@@ -37,7 +38,7 @@
   export default {
     data() {
       return {
-        mockConsoleShow: true,
+        mockConsoleShow: false,
         mockList: {
           checked: true,
           main: {}
@@ -61,8 +62,8 @@
       }
     },
     methods: {
-      openForm(form) {
-        this.$refs.mockForm.openMockForm(form);
+      openForm(key) {
+        this.$refs.mockForm.openMockForm(key);
       },
       //盒子
       openMock: function () {
@@ -71,11 +72,8 @@
       closeMock: function () {
         this.mockConsoleShow = false;
       },
-      mockEdit: function (form) {
-        this.openForm(form);
-      },
-      mockDel: function (url) {
-        delete this.mockList.main[url];
+      mockDel: function (key) {
+        delete this.mockList.main[key];
         this.setLocalStorage();
         this.$forceUpdate();
       },

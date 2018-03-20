@@ -2,6 +2,7 @@
   <popup v-model="mockFormShow" position="right" width="100%">
     <XHeader :left-options="{backText: '',preventGoBack:true}" @on-click-back="closeMockForm()">伪数据拦截</XHeader>
     <group title="表单详情" label-width="100px">
+      <!--<x-input title="ID" v-model="mockForm.id" placeholder-align="right" text-align="right" disabled></x-input>-->
       <x-input title="标题" v-model="mockForm.title" placeholder="请输入标题" placeholder-align="right"
                text-align="right"></x-input>
       <x-input title="接口地址" v-model="mockForm.url" placeholder="请输入API" placeholder-align="right"
@@ -41,10 +42,7 @@
     data() {
       return {
         mockFormShow: false,
-        mockForm: {
-          checked: true,
-          method: ['all'],
-        },
+        mockForm: {},
         methodOpt: [['all', 'get', 'post']],
       };
     },
@@ -64,20 +62,26 @@
     },
     methods: {
       //表单
-      openMockForm: function (form) {
+      openMockForm: function (key) {
+        this.resetMockForm();
         this.mockFormShow = true;
-        if (form) {
-          this.mockForm = form;
+        if (key) {
+          this.id = key;
+          this.mockForm = JSON.parse(localStorage.getItem('mock')).main[key];
         }
       },
       closeMockForm: function () {
-        this.resetMockForm();
+
         this.mockFormShow = false;
       },
       resetMockForm: function () {
+        this.id = undefined;
         this.mockForm = {
-          checked: true,
+          title:'',
+          url:'',
           method: ['all'],
+          checked: true,
+          template:'{}',
         };
       },
       addMock: function () {
@@ -85,9 +89,11 @@
           this.$vux.toast.text('标题跟API必填!');
           return
         }
-        let mock = localStorage.getItem('mock');
-        mock = JSON.parse(mock);
-        mock.main[this.mockForm.url] = this.mockForm;
+        let mock = JSON.parse(localStorage.getItem('mock'));
+        if (!this.id) {
+          this.id = new Date().getTime();
+        }
+        mock.main[this.id] = this.mockForm;
         localStorage.setItem('mock', JSON.stringify(mock));
         //获取缓存并返回列表
         this.consoleUpdate();
