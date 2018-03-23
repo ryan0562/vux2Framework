@@ -2,8 +2,26 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router);
+
+//savedPosition 只能保存body的滚动定位
+const scrollBehavior = (to, from, savedPosition) => {
+  if (savedPosition) {
+    return savedPosition
+  } else {
+    const position = {};
+    //是否是锚点
+    if (to.hash) {
+      position.selector = to.hash;
+    } else {
+      position.x = 0;
+      position.y = 0;
+    }
+    return position
+  }
+};
 const routers = new Router({
   mode: 'history',
+  scrollBehavior,
   routes: [
     {
       path: '/login',
@@ -15,7 +33,12 @@ const routers = new Router({
       name: '首页',
       component: ()=> import('src/pages/index.vue'),
     },
-  ]
+    {
+      path: '/langA',
+      name: '长页面A',
+      component: () => import('src/pages/langA.vue'),
+    },
+  ],
 });
 //路由切换前做一些处理
 routers.beforeEach((to, from, next) => {

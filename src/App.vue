@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <x-header :left-options="{backText: ''}">{{$route.name}}</x-header>
-    <router-view></router-view>
+    <div class="main">
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
+    </div>
     <loading v-model="loading"></loading>
     <mock ref="mock"></mock>
   </div>
