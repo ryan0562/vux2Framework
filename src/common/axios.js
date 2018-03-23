@@ -3,8 +3,10 @@ import {AjaxPlugin} from 'vux'
 import qs from 'qs'
 Vue.use(AjaxPlugin);
 
+
 //添加一个请求拦截器
 AjaxPlugin.$http.interceptors.request.use(function (config) {
+
   return config;
 }, function (error) {
   return Promise.reject(error);
