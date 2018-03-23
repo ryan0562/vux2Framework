@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from 'src/components/HelloWorld.vue'
 
 Vue.use(Router);
 const routers = new Router({
@@ -8,18 +7,13 @@ const routers = new Router({
   routes: [
     {
       path: '/login',
-      name: 'login',
-      component: () => import('src/pages/login.vue')
+      name: '登录',
+      component: () => import('src/pages/login.vue'),
     },
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: '/vux',
-      name: 'vux',
-      component: ()=> import('src/components/HelloFromVux.vue')
+      name: '首页',
+      component: ()=> import('src/pages/index.vue'),
     },
   ]
 });

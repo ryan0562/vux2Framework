@@ -1,5 +1,7 @@
 <template>
+
   <div id="app">
+    <x-header :left-options="{backText: ''}">{{$route.name}}</x-header>
     <router-view></router-view>
     <!--<loading v-model="isLoading"></loading>-->
     <mock ref="mock"></mock>
@@ -7,7 +9,8 @@
 </template>
 
 <script>
-  import {Loading } from 'vux'
+  import {Loading, XHeader} from 'vux'
+
 export default {
   name: 'app',
   data() {
@@ -16,7 +19,7 @@ export default {
     }
   },
   components: {
-    Loading,
+    Loading, XHeader,
     mock:()=>  import('src/components/mock/mockConsole.vue')
   },
   created() {
@@ -41,4 +44,6 @@ export default {
 body {
   background-color: #fbf9fe;
 }
+
+
 </style>
