@@ -20,6 +20,10 @@
       };
     },
     created: function () {
+      this.$http.get('/api/user/login')
+        .then(res=>{
+          console.log(res);
+        })
     },
     components: {
       XHeader, Group, XInput, XButton, Box
